@@ -1,0 +1,176 @@
+{
+  "name": "codenav",
+  "displayName": "CodeNav",
+  "description": "Context-efficient AI coding assistant using call tree navigation",
+  "version": "0.1.0",
+  "publisher": "codenav",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codenav-sidebar",
+          "title": "CodeNav",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "codenav-sidebar": [
+        {
+          "type": "webview",
+          "id": "codenav.chatView",
+          "name": "Agent Chat"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "codenav.startServer",
+        "title": "CodeNav: Start Server"
+      },
+      {
+        "command": "codenav.stopServer",
+        "title": "CodeNav: Stop Server"
+      },
+      {
+        "command": "codenav.restartServer",
+        "title": "CodeNav: Restart Server"
+      },
+      {
+        "command": "codenav.toggleServer",
+        "title": "CodeNav: Toggle Server"
+      },
+      {
+        "command": "codenav.openProject",
+        "title": "CodeNav: Open Project"
+      },
+      {
+        "command": "codenav.startIndexing",
+        "title": "CodeNav: Start Indexing"
+      },
+      {
+        "command": "codenav.showIndexStatus",
+        "title": "CodeNav: Show Index Status"
+      },
+      {
+        "command": "codenav.askAgent",
+        "title": "CodeNav: Ask Agent",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "codenav.searchCode",
+        "title": "CodeNav: Search Code",
+        "icon": "$(search)"
+      },
+      {
+        "command": "codenav.showOutput",
+        "title": "CodeNav: Show Output"
+      },
+      {
+        "command": "codenav.checkHealth",
+        "title": "CodeNav: Check Server Health"
+      }
+    ],
+    "configuration": {
+      "title": "CodeNav",
+      "properties": {
+        "codenav.serverPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to CodeNav server directory (leave empty for auto-detect)"
+        },
+        "codenav.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Path to Python executable"
+        },
+        "codenav.serverPort": {
+          "type": "number",
+          "default": 8765,
+          "description": "Port for CodeNav server"
+        },
+        "codenav.autoStartServer": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically start server on extension activation"
+        },
+        "codenav.autoOpenProject": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically open and index workspace when server starts"
+        },
+        "codenav.maxTokens": {
+          "type": "number",
+          "default": 2048,
+          "description": "Maximum tokens per agent turn"
+        },
+        "codenav.maxIterations": {
+          "type": "number",
+          "default": 10,
+          "description": "Maximum agent iterations"
+        },
+        "codenav.enableTaskPlanning": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable automatic task decomposition for complex requests"
+        }
+      }
+    },
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "codenav.askAgent",
+          "when": "true"
+        },
+        {
+          "command": "codenav.searchCode",
+          "when": "true"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "codenav.askAgent",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a"
+      },
+      {
+        "command": "codenav.searchCode",
+        "key": "ctrl+shift+f",
+        "mac": "cmd+shift+f"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "esbuild": "^0.19.0",
+    "eslint": "^8.40.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

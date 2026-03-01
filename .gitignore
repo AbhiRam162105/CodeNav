@@ -1,0 +1,13 @@
+out
+node_modules
+.vscode-test
+*.vsix
+.env
+server/venv
+server/.venv
+server/codenav-env
+server/**/__pycache__
+server/**/*.pyc
+server/.codenav
+*.log
+.DS_Store
